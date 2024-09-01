@@ -1,0 +1,117 @@
+**Lab Title: Implementing Health Probes in Kubernetes**
+
+---
+
+### **Objective:**
+In this lab, you will learn how to implement and configure health probes (Liveness and Readiness Probes) in Kubernetes to ensure the reliability and robustness of your application. Health probes are crucial for determining the state of an application running inside a Kubernetes cluster and enable the platform to manage container lifecycles effectively.
+
+### **Prerequisites:**
+- Basic knowledge of Kubernetes concepts.
+- A running Kubernetes cluster (Minikube, GKE, EKS, or any other platform).
+- `kubectl` command-line tool installed and configured.
+
+### **Lab Environment Setup:**
+1. **Create a Namespace:**
+   - Create a dedicated namespace for this lab to avoid conflicts with existing resources.
+
+   ```bash
+   kubectl create namespace health-probes-lab
+   ```
+
+2. **Deploy a Sample Application:**
+   - Use a simple NGINX application for this lab. Create a deployment YAML file `nginx-deployment.yaml`.
+
+   ```yaml
+   apiVersion: apps/v1
+   kind: Deployment
+   metadata:
+     name: nginx-deployment
+     namespace: health-probes-lab
+   spec:
+     replicas: 2
+     selector:
+       matchLabels:
+         app: nginx
+     template:
+       metadata:
+         labels:
+           app: nginx
+       spec:
+         containers:
+         - name: nginx
+           image: nginx:latest
+           ports:
+           - containerPort: 80
+           livenessProbe:
+             httpGet:
+               path: /
+               port: 80
+             initialDelaySeconds: 5
+             periodSeconds: 5
+           readinessProbe:
+             httpGet:
+               path: /
+               port: 80
+             initialDelaySeconds: 5
+             periodSeconds: 5
+   ```
+
+   - Apply the deployment:
+
+   ```bash
+   kubectl apply -f nginx-deployment.yaml
+   ```
+
+### **Steps to Implement Health Probes:**
+
+1. **Understanding Liveness and Readiness Probes:**
+   - **Liveness Probe:** Determines if the container is running. If the liveness probe fails, Kubernetes will restart the container.
+   - **Readiness Probe:** Determines if the container is ready to accept traffic. If the readiness probe fails, Kubernetes will stop sending requests to the container until it recovers.
+
+2. **Configuring Liveness Probe:**
+   - The Liveness Probe is configured to send HTTP GET requests to the root (`/`) path on port 80 of the NGINX container. If the application does not respond within the specified time frame, the container is considered unhealthy, and Kubernetes restarts it.
+
+   - **Parameters:**
+     - `initialDelaySeconds`: Time to wait before starting the probe.
+     - `periodSeconds`: Interval between probe attempts.
+
+3. **Configuring Readiness Probe:**
+   - Similar to the Liveness Probe, the Readiness Probe checks the container's ability to handle traffic. It also sends HTTP GET requests to the root path on port 80. If the container is not ready, it will not receive traffic until it passes the probe.
+
+   - **Parameters:**
+     - `initialDelaySeconds`: Time to wait before starting the probe.
+     - `periodSeconds`: Interval between probe attempts.
+
+4. **Deploying and Testing:**
+   - Deploy the application and observe the behavior of both Liveness and Readiness Probes.
+
+   ```bash
+   kubectl get pods -n health-probes-lab
+   ```
+
+   - Check the status of the probes:
+
+   ```bash
+   kubectl describe pod <pod-name> -n health-probes-lab
+   ```
+
+   - You can deliberately make the probe fail by modifying the path in the probe definition and redeploying.
+
+5. **Cleaning Up:**
+   - After completing the lab, clean up the resources:
+
+   ```bash
+   kubectl delete namespace health-probes-lab
+   ```
+
+### **Conclusion:**
+In this lab, you have successfully learned how to implement and test Liveness and Readiness Probes in a Kubernetes environment. These probes are essential for maintaining application health and ensuring that Kubernetes can manage the lifecycle of containers effectively.
+
+---
+
+This lab is based on the foundational principles of health checks as described in Kubernetes, ensuring that your application is resilient and self-healing【4†source】.
+
+[Author Tim Wolfe http://t.me/timwolfe]
+
+
+
