@@ -1,0 +1,215 @@
+=====
+JARaaS Discovery V3.2
+=====
+**Prompt**
+
+### Lab Title: **Ingest, Query, and Visualize Streaming Data with Apache Druid and Apache Kafka**
+
+---
+
+#### **Objective:**
+The primary goal of this lab is to guide users through the process of setting up a streaming data pipeline using Apache Kafka and Apache Druid. Participants will learn how to:
+
+1. Set up Kafka to handle streaming data.
+2. Produce data into a Kafka topic.
+3. Configure Apache Druid to ingest data from Kafka.
+4. Query and visualize the ingested data in Druid.
+
+By the end of this lab, users will have a foundational understanding of integrating Kafka and Druid for real-time data ingestion and analysis, making them capable of handling real-world streaming data scenarios.
+
+---
+
+### **Context:**
+
+**Apache Kafka**: Kafka is a distributed event streaming platform capable of handling trillions of events a day. It is often used for building real-time data pipelines and streaming applications. Kafka allows you to publish, subscribe to, store, and process streams of records in real time.
+
+**Apache Druid**: Druid is a high-performance, column-oriented, distributed data store designed for real-time and batch analytics on large datasets. It is ideal for handling streaming data, offering low-latency ingestion, fast queries, and the ability to scale out as needed.
+
+**Streaming Data Pipelines**: Streaming data pipelines are used to collect, process, and analyze data in real-time. Unlike traditional batch processing, where data is collected over a period and then processed, streaming pipelines continuously ingest and analyze data, enabling immediate insights and actions.
+
+**Use Case Example**: Consider an e-commerce platform that tracks user behavior on its website. With a streaming data pipeline, events such as page views, clicks, and purchases can be ingested in real-time, enabling the platform to react instantly to user actions, such as offering discounts, triggering alerts, or updating inventory.
+
+### **Purpose:**
+
+The objective of your response is to guide users through setting up and managing a real-time data pipeline using Apache Kafka and Apache Druid. The lab aims to:
+
+1. **Educate** users on the concepts of streaming data and the role of Kafka and Druid in handling such data.
+2. **Provide Practical Experience** by walking through the steps of setting up a Kafka topic, producing data to it, ingesting this data into Druid, and querying the ingested data.
+3. **Demonstrate Real-World Applications** by using a hands-on example that simulates a common use case in data-driven industries.
+
+The intended impact on the audience is to empower them with the skills needed to build and manage streaming data pipelines, and to understand the importance of real-time data processing in modern applications.
+
+---
+
+### **Structure:**
+
+#### 1. **Introduction**
+   - **Purpose**: To introduce users to the lab and explain why real-time data processing is critical in modern data-driven applications.
+   - **Content**:
+     - Explanation of streaming data, its benefits, and challenges.
+     - Overview of Apache Kafka and Apache Druid, including their key features and why they are often used together.
+     - Brief introduction to the lab objectives and what users can expect to learn.
+
+#### 2. **Prerequisites**
+   - **Purpose**: To ensure that users have all the necessary tools and knowledge before starting the lab.
+   - **Content**:
+     - **Version Requirements**: Ensure that Druid 29.0.0 or later is installed.
+     - **Docker Setup**: Instructions for setting up Docker, including pulling the necessary Docker Compose files from the [Learn Druid repository](https://github.com/implydata/learn-druid).
+     - **Basic Knowledge**: A reminder that users should have a basic understanding of Python, Kafka, and Druid ingestion/querying processes.
+
+#### 3. **Initialization**
+   - **Purpose**: To set up the environment for the lab and ensure all necessary services are running.
+   - **Content**:
+     - **Environment Setup**: Code to set up the environment, such as installing necessary Python packages, configuring connections, and initializing the Druid client.
+     - **Connection Testing**: Code that connects to the Druid instance and verifies the connection by displaying the Druid version.
+
+#### 4. **Creating a Kafka Topic**
+   - **Purpose**: To create a Kafka topic where streaming data will be published.
+   - **Content**:
+     - **Kafka Overview**: A brief explanation of Kafka topics and partitions.
+     - **Command-Line Instructions**: Step-by-step commands to create a new Kafka topic using the Kafka CLI or Docker.
+     - **Example**: 
+       ```bash
+       kafka-topics --create --topic user_activity --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+       ```
+     - **Validation**: Commands to list Kafka topics and validate the creation of the topic.
+
+#### 5. **Producing Data to the Kafka Topic**
+   - **Purpose**: To generate and send streaming data to the Kafka topic.
+   - **Content**:
+     - **Data Schema**: Define the structure of the data that will be produced (e.g., JSON format with fields such as `user_id`, `action`, `timestamp`).
+     - **Python Script**: A Python script or code cell that continuously sends simulated data to the Kafka topic.
+     - **Example**:
+       ```python
+       from kafka import KafkaProducer
+       import json
+       import time
+
+       producer = KafkaProducer(bootstrap_servers='localhost:9092',
+                                value_serializer=lambda v: json.dumps(v).encode('utf-8'))
+
+       for _ in range(1000):
+           data = {'user_id': 'user_{}'.format(random.randint(1, 100)),
+                   'action': random.choice(['view', 'click', 'purchase']),
+                   'timestamp': time.time()}
+           producer.send('user_activity', data)
+           time.sleep(1)  # Simulate a stream with 1-second intervals
+       ```
+     - **Running the Producer**: Instructions on how to run the producer and monitor messages being sent to the topic.
+
+#### 6. **Configuring Druid to Ingest Data from Kafka**
+   - **Purpose**: To set up Druid to ingest real-time data from the Kafka topic.
+   - **Content**:
+     - **Ingestion Overview**: Explanation of how Druid’s Kafka indexing service works, including the role of supervisors and tasks.
+     - **Ingestion Spec**: Detailed breakdown of a Kafka ingestion spec file, explaining each component (dataSchema, IOConfig, tuningConfig).
+     - **Example Spec**:
+       ```json
+       {
+         "type": "kafka",
+         "dataSchema": {
+           "dataSource": "user_activity",
+           "parser": {
+             "type": "string",
+             "parseSpec": {
+               "format": "json",
+               "dimensionsSpec": {
+                 "dimensions": ["user_id", "action"]
+               },
+               "timestampSpec": {
+                 "column": "timestamp",
+                 "format": "auto"
+               }
+             }
+           },
+           "granularitySpec": {
+             "type": "uniform",
+             "segmentGranularity": "hour",
+             "queryGranularity": "none"
+           }
+         },
+         "ioConfig": {
+           "topic": "user_activity",
+           "consumerProperties": {
+             "bootstrap.servers": "localhost:9092"
+           }
+         },
+         "tuningConfig": {
+           "type": "kafka",
+           "maxRowsInMemory": 50000
+         }
+       }
+       ```
+     - **Starting Ingestion**: Instructions to start the ingestion task using Druid's API or UI, and how to monitor the ingestion process.
+
+#### 7. **Querying Data in Druid**
+   - **Purpose**: To retrieve and analyze the ingested data using Druid’s query capabilities.
+   - **Content**:
+     - **Query Overview**: Explanation of the types of queries supported by Druid (SQL, Timeseries, GroupBy, etc.).
+     - **SQL Queries**: Example SQL queries to retrieve data from the `user_activity` data source.
+     - **Python Integration**: Code to run these queries from within the Python notebook using the Druid client.
+     - **Example Query**:
+       ```sql
+       SELECT
+         action,
+         COUNT(*) AS event_count
+       FROM user_activity
+       WHERE __time BETWEEN TIMESTAMP '2023-01-01 00:00:00' AND TIMESTAMP '2023-01-01 01:00:00'
+       GROUP BY action
+       ORDER BY event_count DESC
+       ```
+     - **Visualization**: Instructions on visualizing the results using Python libraries like Matplotlib or Druid’s native UI.
+
+#### 8. **Monitoring and Managing the Streaming Pipeline**
+   - **Purpose**: To introduce users to the tools and techniques for monitoring and managing the streaming data pipeline.
+   - **Content**:
+     - **Druid Monitoring**: Overview of Druid’s built-in monitoring tools, including the web console, logs, and metrics.
+     - **Kafka Monitoring**: Tools and commands to monitor Kafka topics, partitions, and consumer lag.
+     - **Scaling Tips**: Best practices for scaling the pipeline in production, including optimizing Kafka partitions and Druid segment granularity.
+     - **Example Monitoring Commands**:
+       ```bash
+       kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group <consumer-group>
+       ```
+
+#### 9. **Conclusion**
+   - **Purpose**: To summarize the lab and reinforce the learning objectives.
+   - **Content**:
+     - **Recap**: Summary of the key steps taken in the lab, from Kafka topic creation to querying
+
+ data in Druid.
+     - **Key Takeaways**: Importance of real-time data processing, the roles of Kafka and Druid, and potential applications.
+     - **Next Steps**: Suggestions for further exploration, such as handling more complex data schemas, integrating other data sources, or exploring advanced Druid features like roll-ups and aggregations.
+
+---
+
+### **Constraints:**
+- **Factual Accuracy**: Ensure that all commands, code examples, and explanations are accurate and aligned with the latest versions of Apache Kafka and Druid.
+- **Clarity and Simplicity**: The lab should be written in clear, concise language, suitable for beginners while being informative for more advanced users.
+- **Self-Containment**: The lab should provide all necessary instructions, so users do not need to consult external resources (unless for optional further reading).
+- **Interactive Elements**: Where possible, encourage users to experiment by tweaking parameters, running different queries, or observing how changes affect the system.
+
+---
+
+### **Examples:**
+
+- **Example 1**: A Kafka producer script that sends JSON-encoded user activity data to a Kafka topic every second. The example should illustrate how to simulate a stream of data and verify that data is being published to Kafka.
+  
+- **Example 2**: A Druid SQL query that aggregates the number of different actions (e.g., views, clicks, purchases) performed by users in a given time window. This example will help users understand how to leverage Druid’s powerful querying capabilities to extract insights from real-time data.
+
+- **Example 3**: A visualization of the data ingested into Druid, showing trends over time, such as the number of purchases made each hour. This visual example can be used to demonstrate the value of real-time analytics.
+
+---
+
+### **Additional Information:**
+- **Troubleshooting Tips**: Include a section at the end of each major step with common issues and their solutions (e.g., connection issues, ingestion errors, or query performance tips).
+- **Further Reading**: Provide links to official documentation for Apache Kafka and Apache Druid, as well as any relevant blog posts, case studies, or tutorials for users who want to explore the topics further.
+
+---
+
+### **Clarifications:**
+- Encourage users to ask clarifying questions during the lab or in a dedicated discussion forum. This interactivity ensures that users fully understand each concept before moving on to the next step.
+
+---
+
+This expanded lab framework should provide a comprehensive and hands-on learning experience, helping users gain practical knowledge and confidence in working with streaming data pipelines using Apache Kafka and Apache Druid. If you need further details or specific examples filled in, feel free to ask!
+
+[Author Tim Wolfe http://t.me/timwolfe]
