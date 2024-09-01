@@ -2,5 +2,5 @@
 JARaaS Shared Prompts
 
 Email: rtwolfe@jaraas.ai
-Telegram: https:\\t.me/timwolfe
+Telegram: https://t.me/timwolfe
 
