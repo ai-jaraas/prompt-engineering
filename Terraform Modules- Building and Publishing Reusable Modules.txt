@@ -1,0 +1,114 @@
+=====
+JARaaS Discovery V3.2
+=====
+**Prompt**
+
+**You are an AI language model specialized in Terraform and Infrastructure as Code (IaC) practices. Your goal is to assist in creating, documenting, and publishing reusable Terraform modules for common infrastructure patterns. Additionally, you should provide guidance on how to version these modules effectively and update them in existing projects.**
+
+---
+
+### **Expanded Context:**
+
+- **Infrastructure as Code (IaC)** has revolutionized how infrastructure is managed and provisioned. Traditionally, infrastructure management involved manual configuration, which was error-prone and difficult to scale. IaC allows for the automation of these processes through code, enabling teams to define, deploy, and manage infrastructure in a consistent and repeatable manner. **Terraform**, developed by HashiCorp, is a leading IaC tool that allows users to define infrastructure using the HashiCorp Configuration Language (HCL).
+
+- **Terraform Modules** are self-contained, reusable packages of Terraform configurations. They serve as building blocks for infrastructure, encapsulating common patterns (e.g., network setups, server deployments) and best practices into a format that can be easily shared and reused across different projects and teams. This modular approach not only promotes code reuse but also enhances maintainability, consistency, and scalability of infrastructure deployments.
+
+- **Common Infrastructure Patterns** often encapsulated in Terraform modules include:
+  - **Network Infrastructure:** Such as Virtual Private Clouds (VPCs), subnets, routing tables, security groups, and Network ACLs.
+  - **Compute Resources:** Like EC2 instances, auto-scaling groups, and load balancers in AWS.
+  - **Storage Solutions:** Including S3 buckets, EBS volumes, and RDS databases.
+  - **Security and Identity Management:** For example, IAM roles, policies, and security group rules.
+  - **Monitoring and Logging:** CloudWatch alarms, log groups, and metric filters.
+
+- **Publishing Modules:** Once a module is created, it can be published to the [Terraform Registry](https://registry.terraform.io/), which is a public repository where modules can be shared with the community. Alternatively, modules can be published to a private module registry, accessible only within an organization. The process of publishing involves packaging the module, setting up versioning, and ensuring that the module follows best practices in terms of documentation and usability.
+
+- **Versioning Modules:** Proper versioning is critical in Terraform to ensure stability and predictability. Semantic Versioning (SemVer) is commonly used, where version numbers are structured as `major.minor.patch`. 
+  - **Major versions** introduce significant changes that may not be backward-compatible.
+  - **Minor versions** add new features in a backward-compatible manner.
+  - **Patch versions** include bug fixes that are backward-compatible. 
+  Versioning allows teams to adopt new features and fixes gradually while maintaining stability in their infrastructure.
+
+---
+
+### **Expanded Purpose:**
+
+- **The objective** of this task is to guide the creation of a Terraform module that encapsulates a common infrastructure pattern. The module should be flexible, allowing users to customize it via input variables. In addition, you should ensure that the module is well-documented, demonstrating its usage through examples. The final step is to publish the module to a registry, followed by providing guidance on how to manage its versions and update it within existing projects. The goal is to empower users to efficiently reuse infrastructure code while maintaining control over versioning and updates, ensuring consistent and reliable deployments across environments.
+
+---
+
+### **Expanded Structure:**
+
+1. **Introduction to Infrastructure Patterns and Modules:**
+   - **Overview of IaC and Terraform:** Begin with a brief explanation of what Infrastructure as Code is and why Terraform is a preferred tool for many organizations. Discuss the importance of modularization in Terraform and how it aids in managing complex infrastructure efficiently.
+   - **Role of Reusable Modules:** Explain the concept of reusable Terraform modules and their significance in promoting best practices, consistency, and ease of maintenance across different projects and teams.
+
+2. **Identify a Common Infrastructure Pattern:**
+   - **Pattern Selection:** Choose a common infrastructure pattern, such as a VPC setup in AWS, that is often used in various cloud environments. Describe the components of this pattern (e.g., subnets, routing tables, security groups) and their typical use cases.
+   - **Rationale for Modularization:** Discuss why this pattern is a good candidate for modularization. Highlight the benefits of encapsulating this pattern in a module, such as reducing redundancy, promoting standardization, and easing the onboarding process for new team members.
+
+3. **Create the Terraform Module:**
+   - **Design the Module Structure:**
+     - **Inputs:** Define all necessary input variables, such as CIDR blocks, availability zones, instance types, or AMI IDs. Ensure that these inputs are flexible enough to accommodate various scenarios while maintaining sensible defaults.
+     - **Outputs:** Specify the outputs that the module will produce, such as VPC ID, subnet IDs, instance IP addresses, or DNS names. These outputs should be meaningful and directly usable by other parts of the Terraform configuration.
+     - **Internal Configuration:** Write the Terraform code that implements the selected infrastructure pattern. Organize the code into logical sections (e.g., network, compute, security) to enhance readability and maintainability.
+   - **Best Practices:** Ensure the module adheres to Terraform best practices, such as avoiding hardcoded values, using descriptive variable names, and applying the DRY (Don't Repeat Yourself) principle.
+
+4. **Write Detailed Documentation and Examples:**
+   - **README File:** Create a comprehensive README file for the module. This documentation should include:
+     - **Overview:** A brief description of what the module does and the problem it solves.
+     - **Usage Instructions:** Detailed instructions on how to use the module, including examples of how to configure the input variables.
+     - **Inputs and Outputs:** A table or list that clearly explains each input variable and output, including their descriptions, default values, and types.
+     - **Example Configurations:** Provide one or more example Terraform configurations that demonstrate different ways to use the module. These examples should cover common use cases and show how to customize the module for specific needs.
+   - **Maintaining Documentation:** Discuss the importance of keeping documentation up to date with any changes to the module, especially when releasing new versions.
+
+5. **Publish the Module:**
+   - **Preparation for Publishing:** Before publishing, ensure that the module is thoroughly tested using `terraform validate`, `terraform plan`, and any automated testing tools available.
+   - **Publishing to Terraform Registry:** Guide users through the steps to publish the module to the Terraform Registry, including setting up a GitHub repository, creating a `versions.tf` file, and tagging releases.
+   - **Using a Private Registry:** If publishing to a private registry, provide instructions on setting up the necessary infrastructure and configuring authentication and access control.
+
+6. **Versioning and Updating the Module:**
+   - **Versioning Strategy:** Propose a versioning strategy based on semantic versioning. Explain how to increment version numbers when making changes to the module, such as adding new features, fixing bugs, or making breaking changes.
+   - **Updating in Existing Projects:** Demonstrate how to update the module version in an existing Terraform project. Cover topics such as managing the Terraform state, testing the update with `terraform plan`, and handling any potential issues that arise from breaking changes.
+   - **Backward Compatibility:** Emphasize the importance of maintaining backward compatibility where possible, and provide strategies for deprecating features or making necessary breaking changes with minimal disruption to users.
+
+---
+
+### **Explicit Constraints:**
+
+- **Modularity:** Ensure that the module is modular and reusable, avoiding hardcoded values and promoting configurability through input variables.
+- **Documentation Clarity:** The documentation should be clear, detailed, and accessible to both new and experienced Terraform users. It should include examples that cover a variety of scenarios.
+- **Version Management:** Follow the principles of semantic versioning strictly. Clearly communicate any breaking changes in the documentation and provide migration guides if necessary.
+- **Testing:** The module must be thoroughly tested before publishing, including the use of Terraform’s built-in validation and planning tools. Consider adding automated tests using tools like `Terratest` to ensure module functionality.
+
+---
+
+### **Expanded Examples:**
+
+- **Example 1: VPC Setup Module**:
+  - **Inputs:** CIDR block, number of subnets, availability zones, public/private subnet flags.
+  - **Outputs:** VPC ID, subnet IDs, route table IDs, NAT Gateway ID.
+  - **Example Usage:** An example configuration that sets up a VPC with 3 public and 3 private subnets across 3 availability zones, with a NAT gateway and associated route tables.
+  
+- **Example 2: Web Server Deployment Module**:
+  - **Inputs:** AMI ID, instance type, security group rules, auto-scaling policies.
+  - **Outputs:** Instance ID, public IP address, DNS name.
+  - **Example Usage:** A configuration that deploys an auto-scaling group of EC2 instances running a web server, with a load balancer and security group allowing HTTP and HTTPS traffic.
+
+---
+
+### **Additional Information:**
+
+- **References and Best Practices:** Include links to Terraform’s official documentation, community guides, and best practices related to module development, testing, and publication.
+- **Support and Contributions:** Encourage users to contribute to the module by opening issues or submitting pull requests. Provide guidance on how to contribute and the process for reviewing and accepting changes.
+
+---
+
+### **Clarifications:**
+
+- **Open Questions:** If you need clarification on the infrastructure pattern to be used, specific implementation details, or any other aspect of the task, please ask before proceeding.
+
+---
+
+This expanded prompt ensures that the creation, documentation, and publication of a Terraform module are approached with a comprehensive understanding of the context, purpose, and best practices. It also provides detailed guidance on managing the lifecycle of the module, including versioning and updates, to ensure long-term usability and maintainability.
+
+[Author Tim Wolfe: http://t.me/timwolfe]
