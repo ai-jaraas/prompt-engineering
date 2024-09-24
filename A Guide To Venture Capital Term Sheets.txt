@@ -1,0 +1,141 @@
+
+### **Master Prompt for Generating Detailed Content on Venture Capital Term Sheets**
+
+#### **Purpose**:
+The purpose of this prompt is to generate structured, detailed, and accurate content related to venture capital (VC) term sheets. It should explain key terms, investment processes, legal considerations, and common negotiation points between startups and venture capital investors. The content should be informed by real-world practices, reflecting the stages of a startup’s growth and funding rounds.
+
+---
+
+### **Core Sections**:
+
+#### **1. Introduction to Venture Capital and Term Sheets**
+   
+   **Objective**: Provide a comprehensive introduction to venture capital and term sheets, explaining their purpose, relevance, and critical role in the early stages of startup funding.
+
+   **Key Points**:
+   - **Definition of Venture Capital**: 
+     - Venture capital is a form of private equity financing provided to startups and small businesses that are believed to have long-term growth potential.
+     - Emphasize the high-risk/high-reward nature of VC investments and how they differ from other forms of financing, like bank loans or public equity.
+   - **Definition of a Term Sheet**: 
+     - A term sheet is a non-binding document that outlines the key terms and conditions of an investment agreement between a startup and venture capitalists.
+     - It serves as the foundation for drafting formal investment contracts, including the **Subscription Agreement** and **Shareholders' Agreement**.
+   - **Purpose of a Term Sheet**: 
+     - The term sheet provides clarity on major deal points, helps align expectations between the startup and investors, and guides the negotiation of more detailed legal documents.
+     - Explain that most clauses in a term sheet are non-binding, except for specific clauses such as confidentiality and exclusivity.
+
+   **Context**: 
+   - The importance of venture capital in funding innovative, high-growth businesses.
+   - The need for startups to understand term sheets to avoid unfavorable deal terms that could impact future growth, control, and exit opportunities.
+
+#### **2. Key Components of a Venture Capital Term Sheet**
+
+   **Objective**: Dive into the specific terms typically found in a VC term sheet, providing explanations, examples, and implications for both startups and investors.
+
+   **Key Terms**:
+   
+   - **Type of Shares**:
+     - Most venture capital investments involve **preferred shares**, which give investors certain advantages over common shareholders, including financial and voting rights.
+     - **Context**: Preferred shares protect investors by offering superior rights in areas like dividends, liquidation, and conversion. These shares also limit the founder's control over the company post-investment.
+
+   - **Valuation and Milestones**:
+     - Discuss **pre-money valuation** (the company’s value before the new investment) and **post-money valuation** (value after the investment).
+     - **Context**: The valuation determines how much ownership the VC will get for their investment. Milestones are often tied to the release of funds in tranches, ensuring the startup achieves specific operational goals before receiving more investment.
+
+   - **Dividend Rights**:
+     - Venture capital investors usually prefer **cumulative dividends**, where any unpaid dividends accumulate and must be paid out before common shareholders receive any dividends.
+     - **Context**: Dividend rights are often moot for startups focused on growth, as most profits are reinvested. However, cumulative dividends may significantly affect returns during liquidity events like acquisition or IPO.
+
+   - **Liquidation Preference**:
+     - Defines the amount paid to preferred shareholders before any proceeds are distributed to common shareholders in the event of a sale or liquidation of the company.
+     - **Context**: This protects investors in downside scenarios, ensuring they recover their investment (often with a multiplier) before founders or employees receive payouts. 
+     - Example: A 1x liquidation preference means the investor receives 100% of their investment back before others get paid, while a 2x preference means they get double their investment.
+
+   - **Redemption Rights**:
+     - These allow investors to force the company to buy back their shares at a certain point if an exit (e.g., acquisition or IPO) has not occurred within a specified timeframe.
+     - **Context**: Redemption rights are rarely exercised but provide leverage for VCs if the company is not progressing toward an exit event within a reasonable time.
+
+   - **Anti-Dilution Provisions**:
+     - **Full ratchet** or **weighted average** anti-dilution clauses protect investors if new shares are issued at a lower price than what they paid (i.e., in a “down round”).
+     - **Context**: Anti-dilution clauses prevent dilution of investor ownership, maintaining the investor’s percentage or financial interest in the company despite future financing at lower valuations.
+
+   - **Founder Shares and Vesting**:
+     - Often, a portion of founder shares is subject to **vesting schedules** to incentivize long-term commitment to the company.
+     - **Context**: Vesting aligns the interests of the founders with those of the investors, as the founders will forfeit unvested shares if they leave the company prematurely.
+
+   - **Pre-emption Rights**:
+     - **New Issue Pre-emption Rights**: Allow existing investors to maintain their ownership percentage by participating in future funding rounds.
+     - **Transfer Pre-emption Rights**: Restrict founders or shareholders from selling shares without offering them first to the existing shareholders or investors.
+     - **Context**: Pre-emption rights protect the investor’s ownership and prevent unwanted dilution from new share issuances or share transfers.
+
+   - **Drag-Along and Tag-Along Rights**:
+     - **Drag-Along Rights**: Allow majority shareholders to force minority shareholders to sell their shares in the event of a company sale.
+     - **Tag-Along Rights**: Allow minority shareholders to sell their shares on the same terms as the majority shareholders in the event of a sale.
+     - **Context**: These rights ensure that investors or founders can either force or join a sale without being blocked by minority shareholders, making the company more attractive to acquirers.
+
+   - **Voting Rights and Protective Provisions**:
+     - Preferred shareholders may have enhanced **voting rights** or **protective provisions**, which give them veto power over significant business decisions (e.g., issuing new shares, incurring debt, or selling the company).
+     - **Context**: These terms protect investors from management making decisions that could adversely affect their investment.
+
+#### **3. The Venture Capital Investment Process**
+
+   **Objective**: Outline the step-by-step process involved in venture capital investment, from the startup’s founding to its Series A (and beyond) funding rounds.
+
+   **Key Points**:
+   - **Early Stages**: 
+     - Often, startups begin with **seed funding** from angel investors or early-stage VCs, who invest based on the founder’s vision, market potential, and intellectual property.
+     - Example: **NewCo**, a startup based on university-developed intellectual property, receives $200,000 in seed funding from a venture capital firm, following an agreed **pre-money valuation** of $200,000.
+   
+   - **Series A and B Rounds**:
+     - As the company matures, it moves on to **Series A** and **Series B** rounds, which typically involve larger investments from institutional VCs. These rounds often introduce more formal terms like liquidation preferences and protective provisions.
+   
+   - **Dilution**:
+     - Explain how additional funding rounds dilute existing shareholders' stakes, using cap tables to demonstrate how ownership percentages evolve.
+     - **Context**: Investors may negotiate anti-dilution clauses to offset this dilution.
+
+#### **4. Legal Considerations and the Role of Due Diligence**
+
+   **Objective**: Detail the legal and strategic elements that venture capitalists and startups must consider before finalizing an investment.
+
+   **Key Points**:
+   - **Representations and Warranties**:
+     - These are promises made by the company (and sometimes the founders) about the company’s current status, such as its financial health, intellectual property ownership, and absence of pending litigation.
+     - **Context**: If these warranties are breached, investors may be entitled to compensation or may back out of the deal entirely.
+   
+   - **Due Diligence**:
+     - Before finalizing an investment, investors typically conduct **commercial, financial, legal, and technical due diligence** to assess the startup’s viability.
+     - **Context**: Due diligence can uncover risks that may lead to renegotiation of terms or even withdrawal from the investment process.
+
+   - **Conditions Precedent**:
+     - Investors often include **conditions precedent**, which are specific requirements that must be fulfilled before the investment is completed (e.g., signing employment agreements, obtaining certain regulatory approvals).
+
+#### **5. Example Term Sheet for Series A Funding**
+
+   **Objective**: Provide a realistic example of a term sheet that covers the common terms discussed above.
+
+   **Key Points**:
+   - **Investment Amount**: $5 million in Series A preferred stock.
+   - **Valuation**: Pre-money valuation of $20 million.
+   - **Liquidation Preference**: 1x non-participating liquidation preference.
+   - **Board Structure**: Two seats for investors, two for founders, one independent.
+   - **Anti-Dilution Protection**: Weighted average.
+   - **Founder Vesting**: 4-year vesting with a 1-year cliff.
+   - **Exit Clause**: Drag-along rights for majority investors.
+
+---
+
+### **Additional Examples and Scenario-Based Prompts**:
+
+1. **Blog Post Example**:
+   - “Write a detailed blog post explaining the importance
+
+ of liquidation preferences in venture capital term sheets, using real-world examples to illustrate the benefits for investors and the risks for founders.”
+   
+2. **Scenario-Based Example**:
+   - “Imagine you are the founder of a startup negotiating your first term sheet with venture capital investors. The investors have offered $5 million for 25% ownership with a 1x liquidation preference. Describe how this affects your company’s valuation, share structure, and potential risks for the founders.”
+
+---
+
+### **Feedback and Iterative Refinement**:
+
+   - Use iterative feedback to refine output, ensuring clarity on complex terms (e.g., anti-dilution provisions).
+   - Incorporate more detailed examples as needed to explain nuanced negotiation points.
