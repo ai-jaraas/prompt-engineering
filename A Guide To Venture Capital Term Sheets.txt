@@ -1,3 +1,8 @@
+=====
+JARaaS Discovery V7.1
+=====
+**Prompt**
+[Author Tim Wolfe: http://t.me/timwolfe]
 
 ### **Master Prompt for Generating Detailed Content on Venture Capital Term Sheets**
 
